@@ -9,6 +9,7 @@ const users = sequelize.define('users', {
   },
   username: Sequelize.STRING(255),
   password: Sequelize.STRING(255),
+  phone: Sequelize.STRING(255),
 }, {
   timestamps: true
 })
