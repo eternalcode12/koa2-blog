@@ -1,4 +1,5 @@
 const router = require('koa-router')()
+const user = require('../models/user')
 
 router.prefix('/api')
 
@@ -11,11 +12,26 @@ router
   })
 
   .post('/register', async ctx => {
-    ctx.body = {
-      code: 200,
-      msg: 'register',
-      // 这里 ctx.request.body 可以解析页面传回的数据
-      data: ctx.request.body
+    let {
+      username,
+      password
+    } = ctx.request.body
+    if (username !== '' && password !== '') {
+      user.create({
+        username,
+        password
+      })
+      ctx.body = {
+        code: 200,
+        msg: 'success',
+        // 这里 ctx.request.body 可以解析页面传回的数据
+        // data: ctx.request.body
+      }
+    } else {
+      ctx.body = {
+        code: 400,
+        msg: 'fail'
+      }
     }
   })
 
