@@ -7,11 +7,19 @@ const {
   userInsert
 } = require('../sql/insert')
 const {
-  userSelect
+  userSelect,
+  userSelectAll
 } = require('../sql/select')
 const {
   userUpdate
 } = require('../sql/update')
+const {
+  userDelete
+} = require('../sql/delete')
+
+const apiGetUsers = async ctx => {
+  ctx.body = new Result("操作成功", allCode.SUCCESS, await userSelectAll())
+}
 
 const apiRegister = async ctx => {
   let {
@@ -50,7 +58,26 @@ const apiUpdateUserInfo = async ctx => {
   }
 }
 
+const apiDeleteUser = async ctx => {
+  let {
+    phone
+  } = ctx.request.body
+
+  if (phone) {
+    if (await userSelect(phone).length !== 0) {
+      userDelete(phone)
+      ctx.body = new Result("用户删除完成")
+    } else {
+      ctx.body = new Result("未查询到该用户", allCode.FAIL)
+    }
+  } else {
+    ctx.body = new Result("手机号不能为空!", allCode.FAIL)
+  }
+}
+
 module.exports = {
   apiRegister,
-  apiUpdateUserInfo
+  apiUpdateUserInfo,
+  apiDeleteUser,
+  apiGetUsers
 }

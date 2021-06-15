@@ -10,6 +10,13 @@ const userSelect = (phone) => {
   return result
 }
 
+const userSelectAll = () => {
+  let result = user.findAll()
+
+  return result
+}
+
 module.exports = {
-  userSelect
+  userSelect,
+  userSelectAll
 }
