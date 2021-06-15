@@ -1,5 +1,7 @@
 const router = require('koa-router')()
-const user = require('../models/user')
+// 引入对应的控制器
+const user = require('../controller/user')
+// const user = require('../models/user')
 
 router.prefix('/api')
 
@@ -11,28 +13,6 @@ router
     }
   })
 
-  .post('/register', async ctx => {
-    let {
-      username,
-      password
-    } = ctx.request.body
-    if (username !== '' && password !== '') {
-      user.create({
-        username,
-        password
-      })
-      ctx.body = {
-        code: 200,
-        msg: 'success',
-        // 这里 ctx.request.body 可以解析页面传回的数据
-        // data: ctx.request.body
-      }
-    } else {
-      ctx.body = {
-        code: 400,
-        msg: 'fail'
-      }
-    }
-  })
+  .post('/user/register', user.apiRegister)
 
 module.exports = router
