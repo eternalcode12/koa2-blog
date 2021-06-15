@@ -13,7 +13,9 @@ router
   .post('/register', async ctx => {
     ctx.body = {
       code: 200,
-      msg: 'register'
+      msg: 'register',
+      // 这里 ctx.request.body 可以解析页面传回的数据
+      data: ctx.request.body
     }
   })
 
