@@ -9,7 +9,9 @@ const DBCONFIG = {
 
 const sequelize = new Sequelize(DBCONFIG.DATABASE, DBCONFIG.USERNAME, DBCONFIG.PASSWORD, {
   host: DBCONFIG.HOST,
-  dialect: DBCONFIG.TYPE
+  dialect: DBCONFIG.TYPE,
+  // 解决时区问题
+  timezone: '+08:00'
 })
 
 // 调用实例函数 .authenticate() 测试连接是否成功

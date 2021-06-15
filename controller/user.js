@@ -7,7 +7,7 @@ const {
   userInsert
 } = require('../sql/insert')
 const {
-  userSelect,
+  userFindOne,
   userSelectAll
 } = require('../sql/select')
 const {
@@ -28,8 +28,9 @@ const apiRegister = async ctx => {
     phone
   } = ctx.request.body
   if (username && password && phone) {
-    let result = await userSelect(phone)
-    if (result.length === 0) {
+    let result = await userFindOne(phone)
+    console.log(result)
+    if (result === null) {
       userInsert(username, password, phone)
       ctx.body = new Result(msg.SUCCESS)
     } else {
@@ -47,7 +48,7 @@ const apiUpdateUserInfo = async ctx => {
     phone
   } = ctx.request.body
   if (phone) {
-    if (await userSelect(phone).length !== 0) {
+    if (await userFindOne(phone) !== null) {
       userUpdate(username, password, phone)
       ctx.body = new Result("信息更新成功")
     } else {
@@ -64,7 +65,7 @@ const apiDeleteUser = async ctx => {
   } = ctx.request.body
 
   if (phone) {
-    if (await userSelect(phone).length !== 0) {
+    if (await userFindOne(phone) !== 0) {
       userDelete(phone)
       ctx.body = new Result("用户删除完成")
     } else {

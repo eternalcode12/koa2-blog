@@ -1,7 +1,7 @@
 const user = require('../models/user')
 
-const userSelect = (phone) => {
-  let result = user.findAll({
+const userFindOne = (phone) => {
+  let result = user.findOne({
     where: {
       phone
     }
@@ -17,6 +17,6 @@ const userSelectAll = () => {
 }
 
 module.exports = {
-  userSelect,
+  userFindOne,
   userSelectAll
 }
