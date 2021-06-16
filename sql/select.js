@@ -1,10 +1,10 @@
 const articles = require('../models/article')
 const users = require('../models/user')
 
-const userFindOne = (phone) => {
+const userFindOne = (username) => {
   let result = users.findOne({
     where: {
-      phone
+      username
     },
     // include: [articles]
   })
@@ -18,7 +18,18 @@ const userSelectAll = () => {
   return result
 }
 
+const userLoginSelect = (username) => {
+  let result = users.findOne({
+    where: {
+      username
+    }
+  })
+
+  return result
+}
+
 module.exports = {
   userFindOne,
-  userSelectAll
+  userSelectAll,
+  userLoginSelect
 }

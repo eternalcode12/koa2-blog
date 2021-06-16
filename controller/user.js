@@ -8,7 +8,8 @@ const {
 } = require('../sql/insert')
 const {
   userFindOne,
-  userSelectAll
+  userSelectAll,
+  userLoginSelect
 } = require('../sql/select')
 const {
   userUpdate
@@ -19,6 +20,9 @@ const {
 const {
   bcryptPasswd
 } = require('../config/encrypt')
+const {
+  decodePasswd
+} = require('../config/decode')
 
 const apiGetUsers = async ctx => {
   ctx.body = new Result("操作成功", allCode.SUCCESS, await userSelectAll())
@@ -31,7 +35,7 @@ const apiRegister = async ctx => {
     phone
   } = ctx.request.body
   if (username && password && phone) {
-    let result = await userFindOne(phone)
+    let result = await userFindOne(username)
     if (result === null) {
       userInsert(username, bcryptPasswd(password), phone)
       ctx.body = new Result(msg.SUCCESS)
@@ -49,15 +53,15 @@ const apiUpdateUserInfo = async ctx => {
     password,
     phone
   } = ctx.request.body
-  if (phone) {
-    if (await userFindOne(phone) !== null) {
+  if (username) {
+    if (await userFindOne(username) !== null) {
       userUpdate(username, password, phone)
       ctx.body = new Result("信息更新成功")
     } else {
       ctx.body = new Result("未查询到该用户", allCode.FAIL)
     }
   } else {
-    ctx.body = new Result("手机号不能为空!", allCode.FAIL)
+    ctx.body = new Result("用户名不能为空!", allCode.FAIL)
   }
 }
 
@@ -66,15 +70,33 @@ const apiDeleteUser = async ctx => {
     phone
   } = ctx.request.body
 
-  if (phone) {
-    if (await userFindOne(phone) !== 0) {
+  if (username) {
+    if (await userFindOne(username) !== null) {
       userDelete(phone)
       ctx.body = new Result("用户删除完成")
     } else {
       ctx.body = new Result("未查询到该用户", allCode.FAIL)
     }
   } else {
-    ctx.body = new Result("手机号不能为空!", allCode.FAIL)
+    ctx.body = new Result("用户名不能为空!", allCode.FAIL)
+  }
+}
+
+const apiUserLogin = async ctx => {
+  let {
+    username,
+    password
+  } = ctx.request.body
+  let result = await userLoginSelect(username)
+  if (result !== null) {
+    let flag = decodePasswd(password, result.password)
+    if (flag) {
+      ctx.body = new Result("操作成功", allCode.SUCCESS)
+    } else {
+      ctx.body = new Result("用户名或密码错误", allCode.FAIL)
+    }
+  } else {
+    ctx.body = new Result("该用户未注册", allCode.FAIL)
   }
 }
 
@@ -82,5 +104,6 @@ module.exports = {
   apiRegister,
   apiUpdateUserInfo,
   apiDeleteUser,
-  apiGetUsers
+  apiGetUsers,
+  apiUserLogin
 }

@@ -13,4 +13,6 @@ router
 
   .delete('/user/delete', user.apiDeleteUser)
 
+  .post('/user/login', user.apiUserLogin)
+
 module.exports = router
