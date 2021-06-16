@@ -16,6 +16,9 @@ const {
 const {
   userDelete
 } = require('../sql/delete')
+const {
+  bcryptPasswd
+} = require('../config/encrypt')
 
 const apiGetUsers = async ctx => {
   ctx.body = new Result("操作成功", allCode.SUCCESS, await userSelectAll())
@@ -30,7 +33,7 @@ const apiRegister = async ctx => {
   if (username && password && phone) {
     let result = await userFindOne(phone)
     if (result === null) {
-      userInsert(username, password, phone)
+      userInsert(username, bcryptPasswd(password), phone)
       ctx.body = new Result(msg.SUCCESS)
     } else {
       ctx.body = new Result("用户已存在", allCode.FAIL)

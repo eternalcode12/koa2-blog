@@ -32,8 +32,8 @@ const users = sequelize.define('users', {
 })
 
 // 这里可以依据配置好的内容快速生成对应的表(force: true)是破坏性的生成表，建议项目启动前手动执行，然后关闭该功能
-sequelize.sync({
-  force: false
-})
+// sequelize.sync({
+//   force: true
+// })
 
 module.exports = users

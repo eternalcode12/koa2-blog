@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize')
 const sequelize = require('../config/db')
-const users = require('./user')
 
 const articles = sequelize.define('articles', {
   id: {
@@ -37,13 +36,8 @@ const articles = sequelize.define('articles', {
   timestamps: true
 })
 
-// articles.belongsTo(users, {
-//   foreignKey: 'a_id',
-//   sourceKey: 'u_id'
+// sequelize.sync({
+//   force: false
 // })
-
-sequelize.sync({
-  force: true
-})
 
 module.exports = articles
