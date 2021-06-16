@@ -1,17 +1,19 @@
-const user = require('../models/user')
+const articles = require('../models/article')
+const users = require('../models/user')
 
 const userFindOne = (phone) => {
-  let result = user.findOne({
+  let result = users.findOne({
     where: {
       phone
-    }
+    },
+    // include: [articles]
   })
 
   return result
 }
 
 const userSelectAll = () => {
-  let result = user.findAll()
+  let result = users.findAll()
 
   return result
 }
