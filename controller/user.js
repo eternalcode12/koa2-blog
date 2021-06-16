@@ -23,6 +23,9 @@ const {
 const {
   decodePasswd
 } = require('../config/decode')
+const {
+  sendToken
+} = require('../config/jwt')
 
 const apiGetUsers = async ctx => {
   ctx.body = new Result("操作成功", allCode.SUCCESS, await userSelectAll())
@@ -91,8 +94,13 @@ const apiUserLogin = async ctx => {
   if (result !== null) {
     let flag = decodePasswd(password, result.password)
     if (flag) {
-      ctx.body = new Result("操作成功", allCode.SUCCESS)
+      let data = {
+        token: await sendToken(),
+        users: await userSelectAll()
+      }
+      ctx.body = new Result("操作成功", allCode.SUCCESS, data)
     } else {
+      ctx.response.code = 407
       ctx.body = new Result("用户名或密码错误", allCode.FAIL)
     }
   } else {
