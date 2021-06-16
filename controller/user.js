@@ -29,7 +29,6 @@ const apiRegister = async ctx => {
   } = ctx.request.body
   if (username && password && phone) {
     let result = await userFindOne(phone)
-    console.log(result)
     if (result === null) {
       userInsert(username, password, phone)
       ctx.body = new Result(msg.SUCCESS)

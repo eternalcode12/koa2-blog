@@ -7,9 +7,26 @@ const users = sequelize.define('users', {
     primaryKey: true,
     autoIncrement: 1
   },
-  username: Sequelize.STRING(255),
-  password: Sequelize.STRING(255),
-  phone: Sequelize.STRING(255),
+  // u_id: {
+  //   type: Sequelize.BIGINT(11),
+  //   allowNull: false,
+  //   comment: '用户ID',
+  // },
+  username: {
+    type: Sequelize.STRING(255),
+    allowNull: false,
+    comment: '用户名'
+  },
+  password: {
+    type: Sequelize.STRING(255),
+    allowNull: false,
+    comment: '密码'
+  },
+  phone: {
+    type: Sequelize.STRING(255),
+    allowNull: false,
+    comment: '手机号'
+  },
 }, {
   timestamps: true
 })
