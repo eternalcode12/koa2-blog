@@ -7,10 +7,15 @@ const articles = sequelize.define('articles', {
     primaryKey: true,
     autoIncrement: 1
   },
-  a_id: {
-    type: Sequelize.BIGINT(11),
+  // a_id: {
+  //   type: Sequelize.BIGINT(11),
+  //   allowNull: false,
+  //   comment: '标题ID'
+  // },
+  username: {
+    type: Sequelize.STRING(255),
     allowNull: false,
-    comment: '标题ID'
+    comment: '用户名'
   },
   title: {
     type: Sequelize.STRING(255),
@@ -37,7 +42,7 @@ const articles = sequelize.define('articles', {
 })
 
 // sequelize.sync({
-//   force: false
+//   force: true
 // })
 
 module.exports = articles

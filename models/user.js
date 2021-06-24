@@ -7,11 +7,6 @@ const users = sequelize.define('users', {
     primaryKey: true,
     autoIncrement: 1
   },
-  // u_id: {
-  //   type: Sequelize.BIGINT(11),
-  //   allowNull: false,
-  //   comment: '用户ID',
-  // },
   username: {
     type: Sequelize.STRING(255),
     allowNull: false,
@@ -27,6 +22,16 @@ const users = sequelize.define('users', {
     allowNull: false,
     comment: '手机号'
   },
+  email: {
+    type: Sequelize.STRING(255),
+    allowNull: false,
+    comment: '邮箱'
+  },
+  avatar: {
+    type: Sequelize.TEXT,
+    allowNull: true,
+    comment: '头像'
+  }
 }, {
   timestamps: true
 })

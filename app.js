@@ -9,6 +9,7 @@ const app = new koa()
 app.use(cors())
 // bodyparser 中间件为了解析页面传回的数据
 app.use(bodyparser())
+app.use(require('koa-static')(__dirname + '/public/dist'))
 app.use(router.routes(), router.allowedMethods())
 
 app.listen(3000, () => {

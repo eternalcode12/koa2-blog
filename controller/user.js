@@ -2,7 +2,10 @@ const {
   allCode,
   msg
 } = require('../config/code')
-const Result = require('../config/result')
+const {
+  Result,
+  ResultData
+} = require('../config/result')
 const {
   userInsert
 } = require('../sql/insert')
@@ -94,11 +97,7 @@ const apiUserLogin = async ctx => {
   if (result !== null) {
     let flag = decodePasswd(password, result.password)
     if (flag) {
-      let data = {
-        token: await sendToken(),
-        users: await userSelectAll()
-      }
-      ctx.body = new Result("操作成功", allCode.SUCCESS, data)
+      ctx.body = new Result("操作成功", allCode.SUCCESS, new ResultData('bearer ' + await sendToken(), await userSelectAll()))
     } else {
       ctx.response.code = 407
       ctx.body = new Result("用户名或密码错误", allCode.FAIL)

@@ -6,4 +6,15 @@ class Result {
   }
 }
 
-module.exports = Result
+// 封装请求返回的对应信息
+class ResultData {
+  constructor(token = null, data) {
+    this.token = token
+    this.data = data
+  }
+}
+
+module.exports = {
+  Result,
+  ResultData
+}
