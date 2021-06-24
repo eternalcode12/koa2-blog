@@ -16,7 +16,6 @@ const config = {
 }
 
 const sendMe = function (obj, ctx) {
-  console.log(obj)
   const mail = {
     // 发件人（要和你登录邮箱保持一致）
     from: obj.name + ' ' + '<' + config.auth.user + '>',

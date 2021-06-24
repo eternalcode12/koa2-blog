@@ -6,6 +6,31 @@ const email = require('../controller/email')
 router.prefix('/api')
 
 // 用户
+/**
+ * @swagger
+ * /user/findAllUser: # 接口地址
+ *  get: # 请求体
+ *    description: 获取所有用户信息 # 接口信息
+ *    tags: [用户模块] # 模块名称
+ *    produces:
+ *      - application/x-www-form-urlencoded  # 响应内容类型
+ *    parameters: # 请求参数
+ *    responses:
+ *      '200': 
+ *        description: Ok
+ *      '546':
+ *        description: Fail
+ *      schema: # 返回体说明
+ *        type: 'object'
+ *        properties:
+ *          code:
+ *             type: 'number'
+ *          data:
+ *            type: 'object'
+ *          message:
+ *            type: 'string'
+ *            description: 消息提示 
+ */
 router
   .get('/user/findAllUser', user.apiGetUsers)
 
