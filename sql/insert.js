@@ -1,6 +1,7 @@
 const user = require('../models/user')
 const contacts = require('../models/contact')
 const subscribes = require('../models/subscribes')
+const blogs = require('../models/blog')
 
 // 新增用户
 const userInsert = (username, password, phone) => {
@@ -25,14 +26,20 @@ const contactInsert = (name, email, phone) => {
   })
 }
 
-// const subscribeEmailInsert = (email) => {
-//   subscribes.create({
-//     email,
-//   })
-// }
+// 插入博客内容
+const blogInsert = (imgUrl, createTime, username, count, title, content) => {
+  blogs.create({
+    imgUrl,
+    createTime,
+    username,
+    count,
+    title,
+    content
+  })
+}
 
 module.exports = {
   userInsert,
   contactInsert,
-  // subscribeEmailInsert
+  blogInsert
 }

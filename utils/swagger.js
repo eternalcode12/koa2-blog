@@ -3,9 +3,19 @@ const swaggerJSDoc = require('swagger-jsdoc')
 
 const swaggerDefinition = {
   info: {
-    title: 'API',
     version: '1.0.0',
-    description: 'API',
+    description: 'koa2_nodejs_blog',
+    title: 'Koa2_server Swagger',
+    contact: {
+      name: 'Contact developers',
+      url: 'https://mail.qq.com/',
+      email: '741167479@qq.com'
+    },
+    // 开源协议
+    license: {
+      name: 'Apache 2.0',
+      url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+    }
   },
   host: 'localhost:3000',
   basePath: '/' // Base path (optional)

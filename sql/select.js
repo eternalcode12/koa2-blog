@@ -1,7 +1,9 @@
 const articles = require('../models/article')
 const users = require('../models/user')
 const subscribes = require('../models/subscribes')
+const blogs = require('../models/blog')
 
+// 查找用户
 const userFindOne = (username) => {
   let result = users.findOne({
     where: {
@@ -42,9 +44,22 @@ const searchSubscribeEmail = async (email) => {
   return created
 }
 
+// 获取 blog 信息
+const getBlogContent = async (username) => {
+  let result = blogs.findAll({
+    where: {
+      username
+    },
+    limit: 4
+  })
+
+  return result
+}
+
 module.exports = {
   userFindOne,
   userSelectAll,
   userLoginSelect,
-  searchSubscribeEmail
+  searchSubscribeEmail,
+  getBlogContent
 }
