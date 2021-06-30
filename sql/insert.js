@@ -4,7 +4,7 @@ const subscribes = require('../models/subscribes')
 const blogs = require('../models/blog')
 
 // 新增用户
-const userInsert = (username, password, phone) => {
+const userInsert = (username, password, phone, email) => {
   user.findOrCreate({
     where: {
       phone
@@ -12,7 +12,8 @@ const userInsert = (username, password, phone) => {
     defaults: {
       username,
       password,
-      phone
+      phone,
+      email
     }
   })
 }

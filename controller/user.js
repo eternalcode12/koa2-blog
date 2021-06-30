@@ -38,12 +38,14 @@ const apiRegister = async ctx => {
   let {
     username,
     password,
-    phone
+    phone,
+    email
   } = ctx.request.body
-  if (username && password && phone) {
+  console.log(username, password, phone, email)
+  if (username && password && phone && email) {
     let result = await userFindOne(username)
     if (result === null) {
-      userInsert(username, bcryptPasswd(password), phone)
+      userInsert(username, bcryptPasswd(password), phone, email)
       ctx.body = new Result(msg.SUCCESS)
     } else {
       ctx.body = new Result("用户已存在", allCode.FAIL)

@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@koa/multer": "^3.0.0",
     "bcrypt": "^5.0.1",
     "jsonwebtoken": "^8.5.1",
     "koa-bodyparser": "^4.3.0",
@@ -20,8 +21,10 @@
     "koa2-cors": "^2.0.6",
     "koa2-swagger-ui": "^5.1.0",
     "moment": "^2.29.1",
+    "multer": "^1.4.2",
     "mysql2": "^2.2.5",
     "nodemailer": "^6.6.2",
+    "qiniu": "^7.3.3",
     "sequelize": "^6.6.2",
     "swagger-jsdoc": "^6.1.0"
   }
