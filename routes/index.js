@@ -3,6 +3,8 @@ const router = require('koa-router')()
 const user = require('../controller/user')
 const email = require('../controller/email')
 const blog = require('../controller/blog')
+const apiUploadToken = require('../config/uploadToken')
+const uploadFile = require('../controller/uploadFile')
 
 router.prefix('/api')
 
@@ -76,6 +78,15 @@ router
   .post('/email/subscribe', email.apiSubscribe)
 
   // 获取博客信息
-  .get('/blog/:username', blog.apiGetBlogContent)
+  .get('/blog/:username/:current/:size', blog.apiGetBlogContent)
+
+  // 后台获取博客信息
+  .get('/blog/admin/:username/:current/:size', blog.apiGetBlogContentAdmin)
+
+  // 尝试添加图片上传的接口
+  .post('/uploadToken', apiUploadToken)
+
+  // 文件上传 
+  .post('/upload/file', uploadFile)
 
 module.exports = router

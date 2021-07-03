@@ -8,7 +8,7 @@ const user = {
 const sendToken = () => {
   return new Promise((resolve, reject) => {
     jwt.sign(user, 'secretkey', {
-      expiresIn: '30s'
+      expiresIn: '12h'
     }, (err, token) => {
       if (err) reject(err)
       resolve(token)

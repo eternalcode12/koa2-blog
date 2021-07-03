@@ -44,13 +44,25 @@ const searchSubscribeEmail = async (email) => {
   return created
 }
 
-// 获取 blog 信息
-const getBlogContent = async (username) => {
+// 获取 blog 信息(默认)
+const getBlogContent = async (username, current, size) => {
   let result = blogs.findAll({
     where: {
       username
+    }
+  })
+
+  return result
+}
+
+// 获取blog内容（后台）
+const getBlogContentAdmin = async (username, current, size) => {
+  let result = blogs.findAndCountAll({
+    where: {
+      username
     },
-    limit: 4
+    limit: parseInt(size),
+    offset: parseInt(size) * parseInt(current - 1)
   })
 
   return result
@@ -61,5 +73,6 @@ module.exports = {
   userSelectAll,
   userLoginSelect,
   searchSubscribeEmail,
-  getBlogContent
+  getBlogContent,
+  getBlogContentAdmin
 }

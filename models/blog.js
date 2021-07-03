@@ -13,10 +13,15 @@ const blogs = sequelize.define('blogs', {
     allowNull: true,
     comment: '图片地址'
   },
-  createTime: {
-    type: Sequelize.DATE,
-    allowNull: false,
-    comment: '创建时间'
+  tagDic: {
+    type: Sequelize.STRING(255),
+    allowNull: true,
+    comment: '标签目录'
+  },
+  tags: {
+    type: Sequelize.STRING(255),
+    allowNull: true,
+    comment: '标签'
   },
   username: {
     type: Sequelize.STRING(255),
@@ -26,6 +31,7 @@ const blogs = sequelize.define('blogs', {
   count: {
     type: Sequelize.BIGINT(11),
     allowNull: false,
+    default: 0,
     comment: '查看次数',
   },
   title: {

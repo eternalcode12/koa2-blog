@@ -8,8 +8,7 @@ class Result {
 
 // 封装请求返回的对应信息
 class ResultData {
-  constructor(token = null, data) {
-    this.token = token
+  constructor(data) {
     this.data = data
   }
 }
