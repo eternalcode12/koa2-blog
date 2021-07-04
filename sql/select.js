@@ -49,7 +49,9 @@ const getBlogContent = async (username, current, size) => {
   let result = blogs.findAll({
     where: {
       username
-    }
+    },
+    limit: parseInt(size),
+    offset: parseInt(size) * parseInt(current - 1)
   })
 
   return result

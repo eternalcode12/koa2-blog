@@ -78,7 +78,7 @@ router
   .post('/email/subscribe', email.apiSubscribe)
 
   // 获取博客信息
-  .get('/blog/:username/:current/:size', blog.apiGetBlogContent)
+  .get('/blog', blog.apiGetBlogContent)
 
   // 后台获取博客信息
   .get('/blog/admin/:username/:current/:size', blog.apiGetBlogContentAdmin)
@@ -88,5 +88,13 @@ router
 
   // 文件上传 
   .post('/upload/file', uploadFile)
+
+  .post('/test', async ctx => {
+    ctx.body = {
+      code: 200,
+      msg: 'hello world',
+      data: ctx.request.body
+    }
+  })
 
 module.exports = router
